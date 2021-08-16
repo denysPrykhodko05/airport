@@ -4,7 +4,7 @@ import constants.Constants.{AIRPORT_CODE_COLUMN, USERNAME_COLUMN, VISIT_TIME_COL
 import models.AirportData
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions.{asc, col, count, max}
-import org.apache.spark.sql.{Dataset, Encoders, Row, SparkSession}
+import org.apache.spark.sql.{Dataset, Encoders, Row, SaveMode, SparkSession}
 
 object Application {
 
@@ -12,7 +12,7 @@ object Application {
     val sparkSession: SparkSession = SparkSession.builder().appName("airport").master("local[*]").getOrCreate()
     import sparkSession.implicits._
     val schema = Encoders.product[AirportData].schema
-    val inputDS: Dataset[AirportData] = sparkSession.read.schema(schema).option("header", "true").csv("src/main/resources")
+    val inputDS: Dataset[AirportData] = sparkSession.read.schema(schema).option("header", "true").csv("src/main/resources/input")
       .as[AirportData]
 
     //Approach with window
@@ -22,6 +22,8 @@ object Application {
     //val processedDS = processWithGroupBy(inputDS)
 
     processedDS.show(false)
+
+    processedDS.coalesce(1).write.mode(SaveMode.Overwrite).option("header", "true").csv("src/main/resources/output")
   }
 
   private def processWithWindow(inputDS: Dataset[AirportData]): Dataset[Row]={
