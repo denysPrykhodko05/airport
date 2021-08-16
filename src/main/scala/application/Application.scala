@@ -1,4 +1,4 @@
-package controller
+package application
 
 import constants.Constants.{AIRPORT_CODE_COLUMN, USERNAME_COLUMN, VISIT_TIME_COLUMN}
 import models.AirportData
