@@ -26,8 +26,8 @@ object ProcessUtils {
     inputDS.groupBy(USERNAME_COLUMN, AIRPORT_CODE_COLUMN)
       .agg(max(VISIT_TIME_COLUMN).alias(VISIT_TIME_COLUMN),
         count(AIRPORT_CODE_COLUMN).alias("amount of visit"))
-      .groupBy(AIRPORT_CODE_COLUMN)
       .filter(col("amount of visit").<(5))
+      .groupBy(AIRPORT_CODE_COLUMN)
       .agg(max(VISIT_TIME_COLUMN).alias("recentTime"),
         count(AIRPORT_CODE_COLUMN).alias("amount of visit"))
       .orderBy(asc("amount of visit"))
