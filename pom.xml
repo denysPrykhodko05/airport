@@ -11,30 +11,43 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <scala.version>2.11.0</scala.version>
+        <spark.version>2.3.3</spark.version>
+        <holdenkarau.version>2.4.5_0.14.0</holdenkarau.version>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
-            <version>2.3.3</version>
+            <version>${spark.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
-            <version>2.3.3</version>
+            <version>${spark.version}</version>
         </dependency>
         <dependency>
             <artifactId>spark-testing-base_2.11</artifactId>
             <groupId>com.holdenkarau</groupId>
             <scope>test</scope>
-            <version>2.4.5_0.14.0</version>
+            <version>${holdenkarau.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+            <version>3.0.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
+            <version>1.15</version>
         </dependency>
     </dependencies>
-
 </project>
