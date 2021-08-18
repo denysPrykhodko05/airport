@@ -14,6 +14,7 @@ object ProcessUtils {
       .withColumn("recentTime", max(VISIT_TIME_COLUMN).over(win))
       .withColumn("amount of visit", count("*").over(win))
       .dropDuplicates("recentTime")
+      .filter(col("amount of visit").<(5))
       .groupBy( AIRPORT_CODE_COLUMN)
       .agg(max("recentTime").alias("recentTime"),
         count(AIRPORT_CODE_COLUMN).alias("amount of visit"))
@@ -26,6 +27,7 @@ object ProcessUtils {
       .agg(max(VISIT_TIME_COLUMN).alias(VISIT_TIME_COLUMN),
         count(AIRPORT_CODE_COLUMN).alias("amount of visit"))
       .groupBy(AIRPORT_CODE_COLUMN)
+      .filter(col("amount of visit").<(5))
       .agg(max(VISIT_TIME_COLUMN).alias("recentTime"),
         count(AIRPORT_CODE_COLUMN).alias("amount of visit"))
       .orderBy(asc("amount of visit"))
