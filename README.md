@@ -39,3 +39,5 @@ it should "output correct after process with window" in{
     assertDataFrameDataEquals(expected,actual)
   }
 ~~~~
+
+The input and output files for this application are located in resources folder.
